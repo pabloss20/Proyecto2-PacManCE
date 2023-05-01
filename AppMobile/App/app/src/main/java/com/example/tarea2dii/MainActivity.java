@@ -18,12 +18,4 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
-
-    public void onBtnClick (View view){
-        TextView textView = findViewById(R.id.finalstring);
-        EditText editTextO = findViewById(R.id.stringO);
-        EditText editTextT = findViewById(R.id.stringT);
-        String newText = editTextO.getText().toString() + editTextT.getText().toString();
-        textView.setText(newText);
-    }
 }
