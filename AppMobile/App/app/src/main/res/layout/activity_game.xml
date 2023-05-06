@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/up_button"
+        android:layout_width="105dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="116dp"
+        android:foreground="@drawable/up"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toEndOf="@+id/down_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/down_button"
+        app:layout_constraintTop_toBottomOf="@+id/score_view" />
+
+    <Button
+        android:id="@+id/down_button"
+        android:layout_width="104dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="52dp"
+        android:foreground="@drawable/down"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/left_button"
+        android:layout_width="102dp"
+        android:layout_height="62dp"
+        android:foreground="@drawable/left"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toStartOf="@+id/up_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_button"
+        app:layout_constraintVertical_bias="0.516" />
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="102dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:foreground="@drawable/right"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintStart_toEndOf="@+id/up_button"
+        app:layout_constraintTop_toBottomOf="@+id/up_button"
+        app:layout_constraintVertical_bias="0.531" />
+
+    <ImageView
+        android:id="@+id/score_view"
+        android:layout_width="166dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/score" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="67dp"
+        android:layout_height="21dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#3BFFFC"
+        app:layout_constraintBottom_toBottomOf="@+id/score_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/score_view"
+        app:layout_constraintVertical_bias="0.542" />
+
+    <ImageView
+        android:id="@+id/life1"
+        android:layout_width="89dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/score_view"
+        app:layout_constraintEnd_toStartOf="@+id/life2"
+        app:layout_constraintHorizontal_bias="0.662"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/life" />
+
+    <ImageView
+        android:id="@+id/life3"
+        android:layout_width="89dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/score_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toEndOf="@+id/life2"
+        app:srcCompat="@drawable/life" />
+
+    <ImageView
+        android:id="@+id/life2"
+        android:layout_width="89dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/score_view"
+        app:layout_constraintEnd_toEndOf="@+id/score_view"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="@+id/score_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/life" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

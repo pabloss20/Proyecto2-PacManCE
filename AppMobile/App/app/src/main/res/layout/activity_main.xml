@@ -2,121 +2,95 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/up_button"
-        android:layout_width="105dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="116dp"
-        android:foreground="@drawable/up"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/down_button"
-        app:layout_constraintEnd_toEndOf="@+id/down_button"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/down_button"
-        app:layout_constraintTop_toBottomOf="@+id/score_view" />
-
-    <Button
-        android:id="@+id/down_button"
-        android:layout_width="104dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="52dp"
-        android:foreground="@drawable/down"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="textview1_string"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/left_button"
-        android:layout_width="102dp"
-        android:layout_height="62dp"
-        android:foreground="@drawable/left"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/down_button"
-        app:layout_constraintEnd_toStartOf="@+id/up_button"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_button"
-        app:layout_constraintVertical_bias="0.516" />
-
-    <Button
-        android:id="@+id/right_button"
-        android:layout_width="102dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="4dp"
-        android:foreground="@drawable/right"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/down_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
-        app:layout_constraintStart_toEndOf="@+id/up_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button"
-        app:layout_constraintVertical_bias="0.531" />
-
-    <ImageView
-        android:id="@+id/score_view"
-        android:layout_width="166dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/score" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/score"
-        android:layout_width="67dp"
-        android:layout_height="21dp"
-        android:text="0"
-        android:textAlignment="center"
-        android:textColor="#3BFFFC"
-        app:layout_constraintBottom_toBottomOf="@+id/score_view"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Se ha presionado: 0 veces"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/score_view"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/life1"
-        android:layout_width="89dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/score_view"
-        app:layout_constraintEnd_toStartOf="@+id/life2"
-        app:layout_constraintHorizontal_bias="0.662"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/life" />
-
-    <ImageView
-        android:id="@+id/life3"
-        android:layout_width="89dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/score_view"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toEndOf="@+id/life2"
-        app:srcCompat="@drawable/life" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+    <EditText
+        android:id="@+id/entry1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="187dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entry1" />
 
     <ImageView
-        android:id="@+id/life2"
-        android:layout_width="89dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/score_view"
-        app:layout_constraintEnd_toEndOf="@+id/score_view"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="@+id/score_view"
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/life" />
+        app:srcCompat="@android:drawable/ic_popup_sync" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="Recargar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/refresh" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
