@@ -1,0 +1,3 @@
+/home/pablo/Github/Proyecto2DatosII/Proyecto2-PacManCE/GamePC/GUI/cmake-build-debug/CMakeFiles/GUI.dir
+/home/pablo/Github/Proyecto2DatosII/Proyecto2-PacManCE/GamePC/GUI/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/pablo/Github/Proyecto2DatosII/Proyecto2-PacManCE/GamePC/GUI/cmake-build-debug/CMakeFiles/rebuild_cache.dir
