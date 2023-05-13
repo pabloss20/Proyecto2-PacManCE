@@ -28,9 +28,9 @@ public class Control extends Sockets {
         health = findViewById(R.id.health_textview);
         score = findViewById(R.id.score_textview);
 
-        up_button.setOnClickListener(view -> sendInfo("1"));
-        down_button.setOnClickListener(view -> sendInfo("2"));
-        left_button.setOnClickListener(view -> sendInfo("3"));
-        right_button.setOnClickListener(view -> sendInfo("4"));
+        up_button.setOnClickListener(view -> super.sendInfo("1"));
+        down_button.setOnClickListener(view -> super.sendInfo("2"));
+        left_button.setOnClickListener(view -> super.sendInfo("3"));
+        right_button.setOnClickListener(view -> super.sendInfo("4"));
     }
 }

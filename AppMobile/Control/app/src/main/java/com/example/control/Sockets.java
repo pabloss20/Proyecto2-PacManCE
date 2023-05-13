@@ -76,14 +76,12 @@ public class Sockets extends AppCompatActivity {
 
     public void sendInfo(String message){
         new Thread(() -> {
-            String a = "";
             try {
 
                 socket = new Socket(server_ip, server_port);
                 input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 output = new PrintWriter(socket.getOutputStream(), true);
 
-                System.out.println(message);
                 output.printf(message);
                 Log.d("ENVIADO", message);
 
