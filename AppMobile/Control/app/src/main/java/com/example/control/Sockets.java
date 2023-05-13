@@ -43,6 +43,8 @@ public class Sockets extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sockets);
 
+        String saludo = "Hola, estoy controlando el jugador desde mi Android";
+
         send_button = findViewById(R.id.send_button);
         entry_IP = findViewById(R.id.entryIP);
         next_activity = new Intent(getApplicationContext(), Control.class);
@@ -50,7 +52,7 @@ public class Sockets extends AppCompatActivity {
 
             server_ip = entry_IP.getText().toString();
             if (isValidIPv4(server_ip)){
-                sendInfo();
+                sendInfo(saludo);
                 startActivity(next_activity);
             } else {
                 noValidIP();
@@ -72,7 +74,7 @@ public class Sockets extends AppCompatActivity {
         return matcher.matches();
     }
 
-    private void sendInfo(){
+    public void sendInfo(String message){
         new Thread(() -> {
             String a = "";
             try {
@@ -81,7 +83,7 @@ public class Sockets extends AppCompatActivity {
                 input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 output = new PrintWriter(socket.getOutputStream(), true);
 
-                String message = "Hola";
+                System.out.println(message);
                 output.printf(message);
                 Log.d("ENVIADO", message);
 
