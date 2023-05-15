@@ -6,10 +6,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.ColorInt;
+import androidx.core.content.ContextCompat;
 
 public class Control extends Sockets{
 
@@ -18,8 +20,8 @@ public class Control extends Sockets{
     }
 
     // COntrol
-    Button up_button, down_button, left_button, right_button;
-    TextView score, health, X, Y, Z;
+    Button up, down, left, right;
+    TextView score, health, X, Y, Z, direction, last;
 
     // Giroscopio
     SensorManager sensor_manager;
@@ -40,17 +42,43 @@ public class Control extends Sockets{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
         // Control
-        up_button = findViewById(R.id.up_button);
-        down_button = findViewById(R.id.down_button);
-        left_button = findViewById(R.id.left_button);
-        right_button = findViewById(R.id.right_button);
+        up = findViewById(R.id.up_button);
+        down = findViewById(R.id.down_button);
+        left = findViewById(R.id.left_button);
+        right = findViewById(R.id.right_button);
         health = findViewById(R.id.health_textview);
         score = findViewById(R.id.score_textview);
+        direction = findViewById(R.id.direction_textview);
+        last = findViewById(R.id.last_button);
 
-        up_button.setOnClickListener(view -> super.sendInfo("1"));
-        down_button.setOnClickListener(view -> super.sendInfo("2"));
-        left_button.setOnClickListener(view -> super.sendInfo("3"));
-        right_button.setOnClickListener(view -> super.sendInfo("4"));
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendInfo("1");
+                last.setText("Last button pressed: Up");
+            }
+        });
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendInfo("2");
+                last.setText("Last button pressed: Down");
+            }
+        });
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendInfo("3");
+                last.setText("Last button pressed: Left");
+            }
+        });
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendInfo("4");
+                last.setText("Last button pressed:  Right");
+            }
+        });
     }
 
     // Metodos para el giroscopio
@@ -75,6 +103,29 @@ public class Control extends Sockets{
             X.setText("X: " + x);
             Y.setText("Y: " + y);
             Z.setText("Z: " + z);
+
+            if (x == 0 && y == 0 && z == 0){direction.setText("Direction: Static");}
+
+            if (x < 0)
+            {
+                sendInfo("1");
+                direction.setText("Direction: Up");
+            }
+            if (y < 0)
+            {
+                sendInfo("3");
+                direction.setText("Direction: Left");
+            }
+            if (x > 0)
+            {
+                sendInfo("2");
+                direction.setText("Direction: Down");
+            }
+            if (y > 0)
+            {
+                sendInfo("4");
+                direction.setText("Direction: Right");
+            }
         }
 
         @Override
