@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +16,8 @@ import androidx.core.content.ContextCompat;
 
 public class Control extends Sockets{
 
-    public Control(){
+    public Control()
+    {
         super();
     }
 
@@ -51,6 +53,8 @@ public class Control extends Sockets{
         direction = findViewById(R.id.direction_textview);
         last = findViewById(R.id.last_button);
 
+        Log.d("DIRECCION IP", server_ip);
+
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +88,7 @@ public class Control extends Sockets{
     // Metodos para el giroscopio
     public void onResume(){
         super.onResume();
-        sensor_manager.registerListener(giroscopio_listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sensor_manager.registerListener(giroscopio_listener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     public void onStop(){
@@ -96,32 +100,39 @@ public class Control extends Sockets{
         @Override
         public void onSensorChanged(SensorEvent event) {
 
+            // Toma los valores x, y, z del giroscopio
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
 
-            X.setText("X: " + x);
-            Y.setText("Y: " + y);
-            Z.setText("Z: " + z);
+            // Actualiza el texto de los text_view con el redondeo
+            X.setText("X: " + Math.round(x * 100.0) / 100.0);
+            Y.setText("Y: " + Math.round(y * 100.0) / 100.0);
+            Z.setText("Z: " + Math.round(y * 100.0) / 100.0);
 
+            // Si los valores de x, y, z son 0 actualiza el text_view como Static
             if (x == 0 && y == 0 && z == 0){direction.setText("Direction: Static");}
 
-            if (x < 0)
+            // Mover hacia arriba
+            if (x < -1)
             {
                 sendInfo("1");
                 direction.setText("Direction: Up");
             }
-            if (y < 0)
+            // Mover hacia la izquierda
+            if (y < -1)
             {
                 sendInfo("3");
                 direction.setText("Direction: Left");
             }
-            if (x > 0)
+            // Mover hacia abajo
+            if (x > 1)
             {
                 sendInfo("2");
                 direction.setText("Direction: Down");
             }
-            if (y > 0)
+            // Mover hacia la derecha
+            if (y > 1)
             {
                 sendInfo("4");
                 direction.setText("Direction: Right");

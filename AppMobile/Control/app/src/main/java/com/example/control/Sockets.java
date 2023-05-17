@@ -29,8 +29,8 @@ public class Sockets extends AppCompatActivity {
     private Socket socket;
     private BufferedReader input;
     private PrintWriter output;
-    private String server_ip;
-    private int server_port;
+    protected String server_ip;
+    protected int server_port;
 
     // Components
     Button send_button;

@@ -5,6 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".Control">
 
     <Button
@@ -64,30 +65,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Health: 3"
+        android:textColor="#FFEB3B"
         android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/score_textview"
-        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447" />
 
     <TextView
         android:id="@+id/score_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="56dp"
         android:text="Score: 0"
+        android:textColor="#FFEB3B"
         android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447" />
 
     <TextView
         android:id="@+id/tvx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="X"
+        android:textColor="#00BCD4"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/health_textview"
         app:layout_constraintEnd_toStartOf="@+id/tvy"
@@ -99,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Y"
+        android:textColor="#00BCD4"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/score_textview"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Z"
+        android:textColor="#00BCD4"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/score_textview"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,6 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Direction: Static"
+        android:textColor="#4CAF50"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/last_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +142,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Last button pressed"
+        android:textColor="#4CAF50"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/tvy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

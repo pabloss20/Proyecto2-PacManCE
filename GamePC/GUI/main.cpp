@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <thread>
 
 void SocketServer() {
     int server_fd, new_socket;
@@ -79,5 +80,7 @@ void SocketServer() {
 }
 
 int main(int argc, char const *argv[]) {
+
+    // 192.168.137.146
     while(true) { SocketServer(); }
 }
