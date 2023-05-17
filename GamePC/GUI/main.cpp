@@ -1,127 +1,86 @@
 #include <iostream>
-#include <limits.h>
+#include <cstring>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <thread>
 
-// Matriz de juego (la matriz se coloca acá debido a que no se pudo pasar como argumento ya sea en el constructor o método)
-int matrix[7][7] =
-        {
-                { 1, 1, 0, 0, 0, 1, 1},
-                { 0, 1, 1, 1, 1, 1, 1},
-                { 1, 0, 0, 1, 0, 1, 1},
-                { 0, 1, 1, 1, 0, 0, 1},
-                { 0, 1, 0, 1, 1, 1, 1},
-                { 0, 1, 0, 0, 1, 0, 0},
-                { 1, 0, 1, 1, 1, 1, 1}
-        };
+void SocketServer() {
+    int server_fd, new_socket;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
 
-// Clase Bactracking la cual encuentra la ruta de menor costo
-class Backtracking{
-
-public:
-
-    int *start; // inicio
-    int *end;   // fin
-    int visited[7][7] = {0}; // matriz de 0 el cual marca las posiciones visitadas
-    int shortLength = INT_MAX; // la ruta más corta - contador
-    int length=0; // contador
-    bool hasPath = false; // verifica si hay ruta o no
-
-    // Constructor de la clase
-    Backtracking(int start[], int end[])
-    {
-        this->start = start;
-        this->end = end;
+    // Crear socket
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        std::cerr << "Error al crear socket" << std::endl;
+        return;
     }
 
-    // Método el cual inicia el proceso de búsqueda de la ruta
-    void findPath(){
-        visit(start[0], start[1]);
+    // Opción de socket para reutilizar la dirección
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
+        std::cerr << "Error en setsockopt" << std::endl;
+        return;
     }
 
-    // Método para visitar una posicion y realizar otro movimiento recursivamente
-    void visit(int x, int y){
+    // Configurar dirección del socket
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(5001);
 
-        // Caso base - alcanza la posicion de destino
-        if(x == end[0] && y == end[1]){
-
-            // actualiza la ruta - marca true si hay una posible ruta
-            hasPath=true;
-
-            // Almacena el minimo de la ruta
-            if(length < shortLength)
-                shortLength= length;
-
-            // Realiza el bactracking para explorar más ruta
-            return;
-        }
-
-        // Marca la posicion actual como visitada
-        visited[x][y] = 1;
-
-        // incremente la ruta actual +1
-        length++;
-
-        // Right
-        if(canVisit(x+1, y)){
-            visit(x+1, y);
-            std::cout << "Right " << " " << x << " " << y << std::endl;
-            // Agregar la cola acá para que agregue la posicion
-        }
-
-        // Down
-        if(canVisit(x, y+1)){
-            visit(x, y+1);
-            std::cout << "Down" << " " << x << " " << y << std::endl;
-            // Agregar la cola acá para que agregue la posicion
-        }
-
-        // Left
-        if(canVisit(x-1, y)){
-            visit(x-1, y);
-            std::cout << "Left " << " " <<  x << " " << y << std::endl;
-            // Agregar la cola acá para que agregue la posicion
-        }
-
-        // Up
-        if(canVisit(x, y-1)){
-            visit(x, y-1);
-            std::cout << "Up " << " " << x << " " << y << std::endl;
-            // Agregar la cola acá para que agregue la posicion
-        }
-
-        //Backtrack by unvisiting the current cell and
-        //decrementing the value of current path length
-        visited[x][y] = 0;
-        length--;
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt))) {
+        std::cerr << "Error en setsockopt" << std::endl;
+        return;
     }
 
-    // Analiza si la posicion i j es una posicion valida o no
-    bool canVisit(int x, int y){
-        // Columnas en la matriz
-        int m=sizeof(matrix[0])/sizeof(matrix[0][0]);
-        // Filas en la matriz
-        int n=sizeof(matrix)/sizeof(matrix[0]);
-        // Analiza los extremos de la matriz
-        if(x<0 || y<0 || x>=m || y>=n)
-            return false;
-        // Analiza si la posicion ya fue visitada o si es 0
-        if(matrix[x][y]==0 || visited[x][y]==1)
-            return false;
-        return true;
+    // Enlazar socket a la dirección y puerto especificados
+    if (bind(server_fd, (struct sockaddr *) &address, sizeof(address)) < 0) {
+        std::cerr << "Error en bind" << std::endl;
+        return;
     }
-};
-//Driver Code
-int main() {
 
-    // Valores para el constructor de la clase - posicion inicial hasta la posicion final
-    int start[] = {0, 0};
-    int end[] = {6, 6};
+    // Escuchar conexiones entrantes
+    if (listen(server_fd, 3) < 0) {
+        std::cerr << "Error en listen" << std::endl;
+        return;
+    }
 
-    Backtracking backtracking(start, end);
-    backtracking.findPath();
+    std::cout << "Servidor en espera de conexiones..." << std::endl;
 
-    // Muestra el largo de la ruta si la encontró
-    if(backtracking.hasPath)
-        std::cout << "Valor de la ruta más corta: " << backtracking.shortLength;
-    else
-        std::cout << "No existe ruta";
+    // Aceptar nueva conexión
+    if ((new_socket = accept(server_fd, (struct sockaddr *) &address, (socklen_t *) &addrlen)) < 0) {
+        std::cerr << "Error en accept" << std::endl;
+        return;
+    }
+
+    std::cout << "Nueva conexión aceptada" << std::endl;
+
+    // Procesar mensajes entrantes
+    char buffer[1024] = {0};
+    int valread = read(new_socket, buffer, 1024);
+    if (valread <= 0) {
+        std::cout << "Cliente desconectado" << std::endl;
+        close(new_socket);
+        return;
+    }
+    std::cout << "Mensaje recibido: " << buffer << std::endl;
+
+    char respuesta[] = "Mensaje recibido.\n";
+    send(new_socket, respuesta, sizeof(respuesta), 0);
+    std::cout << "Respuesta: " << respuesta << std::endl;
+
+    if (close(server_fd) == -1) {
+        std::cerr << "Error al cerrar el socket: " << std::strerror(errno) << std::endl;
+        return;
+    }
+    if (close(new_socket) == -1) {
+        std::cerr << "Error al cerrar el socket: " << std::strerror(errno) << std::endl;
+        return;
+    }
+}
+
+int main(int argc, char const *argv[]) {
+
+    // 192.168.137.146
+    while(true) { SocketServer(); }
 }
