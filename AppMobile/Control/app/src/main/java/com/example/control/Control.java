@@ -21,7 +21,7 @@ public class Control extends Sockets{
         super();
     }
 
-    // COntrol
+    // Control
     Button up, down, left, right;
     TextView score, health, X, Y, Z, direction, last;
 
@@ -33,6 +33,9 @@ public class Control extends Sockets{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
+
+        server_ip = getIntent().getStringExtra("Server_IP");
+        server_port = 5001;
 
         // Giroscopio
         sensor_manager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);

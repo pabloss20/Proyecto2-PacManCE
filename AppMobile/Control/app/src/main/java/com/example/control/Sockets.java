@@ -45,6 +45,8 @@ public class Sockets extends AppCompatActivity {
 
         String saludo = "Hola, estoy controlando el jugador desde mi Android";
 
+        server_port = 5001;
+
         send_button = findViewById(R.id.send_button);
         entry_IP = findViewById(R.id.entryIP);
         next_activity = new Intent(getApplicationContext(), Control.class);
@@ -53,6 +55,7 @@ public class Sockets extends AppCompatActivity {
             server_ip = entry_IP.getText().toString();
             if (isValidIPv4(server_ip)){
                 sendInfo(saludo);
+                next_activity.putExtra("Server_IP", server_ip);
                 startActivity(next_activity);
             } else {
                 noValidIP();
